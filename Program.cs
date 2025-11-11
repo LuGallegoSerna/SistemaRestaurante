@@ -26,33 +26,60 @@
 //     }
 // }
 
+// using System;
+// using Estructuras;
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         Console.WriteLine("=== PRUEBA DE COLA ===");
+//         Cola<string> cola = new Cola<string>();
+//         cola.Encolar("Pedido 1");
+//         cola.Encolar("Pedido 2");
+//         cola.Encolar("Pedido 3");
+//         cola.Mostrar();
+
+//         Console.WriteLine($"Desencolando: {cola.Desencolar()}");
+//         cola.Mostrar();
+
+//         Console.WriteLine("\n=== PRUEBA DE PILA ===");
+//         Pila<string> pila = new Pila<string>();
+//         pila.Apilar("Plato 1");
+//         pila.Apilar("Plato 2");
+//         pila.Apilar("Plato 3");
+//         pila.Mostrar();
+
+//         Console.WriteLine($"Desapilando: {pila.Desapilar()}");
+//         pila.Mostrar();
+//     }
+// }
+
+
 using System;
-using Estructuras;
+using Dominio;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine("=== PRUEBA DE COLA ===");
-        Cola<string> cola = new Cola<string>();
-        cola.Encolar("Pedido 1");
-        cola.Encolar("Pedido 2");
-        cola.Encolar("Pedido 3");
-        cola.Mostrar();
+        try
+        {
+            Restaurante rest = new Restaurante(
+                nit: "900130748",
+                nombre: "Donde Mamá",
+                celular: "3108993117",
+                direccion: "Cra 25 A # 4-02"
+            );
 
-        Console.WriteLine($"Desencolando: {cola.Desencolar()}");
-        cola.Mostrar();
-
-        Console.WriteLine("\n=== PRUEBA DE PILA ===");
-        Pila<string> pila = new Pila<string>();
-        pila.Apilar("Plato 1");
-        pila.Apilar("Plato 2");
-        pila.Apilar("Plato 3");
-        pila.Mostrar();
-
-        Console.WriteLine($"Desapilando: {pila.Desapilar()}");
-        pila.Mostrar();
+            rest.MostrarInfo();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 }
+
 
 
