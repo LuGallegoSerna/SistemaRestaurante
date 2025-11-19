@@ -56,7 +56,117 @@
 // }
 
 
-using System;
+// using System;
+// using Dominio;
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         try
+//         {
+//             Restaurante rest = new Restaurante(
+//                 nit: "900130748",
+//                 nombre: "Donde Mamá",
+//                 celular: "3108993117",
+//                 direccion: "Cra 25 A # 4-02"
+//             );
+
+//             rest.MostrarInfo();
+//         }
+//         catch (Exception ex)
+//         {
+//             Console.WriteLine($"Error: {ex.Message}");
+//         }
+//     }
+// }
+
+// using Dominio;
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         try
+//         {
+//             Cliente cliente = new Cliente(
+//                 cedula: "1001234567",
+//                 nombreCompleto: "Lu Gallego",
+//                 celular: "3004567890",
+//                 email: "prueba@mail.com"
+//             );
+
+//             cliente.MostrarInfo();
+//         }
+//         catch (Exception ex)
+//         {
+//             Console.WriteLine($"Error: {ex.Message}");
+//         }
+//     }
+// }
+
+// using Dominio;
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         try
+//         {
+//             Plato plato = new Plato(
+//                 codigo: "P001",
+//                 nombre: "Bandeja paisa",
+//                 descripcion: "Arroz, fríjoles, carne molida, chicharrón, huevo y aguacate.",
+//                 precio: 25000m
+//             );
+
+//             plato.MostrarInfo();
+//         }
+//         catch (Exception ex)
+//         {
+//             Console.WriteLine($"Error: {ex.Message}");
+//         }
+//     }
+// }
+
+
+// using Dominio;
+// using Estructuras;
+
+// class Program
+// {
+//     static void Main()
+//     {
+//         try
+//         {
+//             Plato bandeja = new Plato(
+//                 codigo: "P001",
+//                 nombre: "Bandeja paisa",
+//                 descripcion: "Arroz, fríjoles, carne molida, chicharrón, huevo y aguacate.",
+//                 precio: 25000m
+//             );
+
+//             Plato jugo = new Plato(
+//                 codigo: "P002",
+//                 nombre: "Jugo natural",
+//                 descripcion: "Jugo de naranja.",
+//                 precio: 6000m
+//             );
+
+//             Pedido pedido = new Pedido(cedulaCliente: "1001234567");
+
+//             pedido.AgregarPlato(bandeja, 1);
+//             pedido.AgregarPlato(jugo, 2);
+
+//             pedido.MostrarInfo();
+//         }
+//         catch (Exception ex)
+//         {
+//             Console.WriteLine($"Error: {ex.Message}");
+//         }
+//     }
+// }
+
 using Dominio;
 
 class Program
@@ -66,13 +176,51 @@ class Program
         try
         {
             Restaurante rest = new Restaurante(
-                nit: "900130748",
-                nombre: "Donde Mamá",
-                celular: "3108993117",
-                direccion: "Cra 25 A # 4-02"
+                nit: "900123456",
+                nombre: "Restaurante El Buen Sabor",
+                celular: "3004567890",
+                direccion: "Calle 10 #15-20"
             );
 
+            Cliente c1 = new Cliente(
+                cedula: "1001234567",
+                nombreCompleto: "Lu Gallego",
+                celular: "3004567890"
+            );
+
+            Cliente c2 = new Cliente(
+                cedula: "1009876543",
+                nombreCompleto: "Manguito Feliz",
+                celular: "3012345678"
+            );
+
+            Plato p1 = new Plato(
+                codigo: "P001",
+                nombre: "Bandeja paisa",
+                descripcion: "Arroz, fríjoles, carne molida, chicharrón, huevo y aguacate.",
+                precio: 25000m
+            );
+
+            Plato p2 = new Plato(
+                codigo: "P002",
+                nombre: "Jugo natural",
+                descripcion: "Jugo de naranja.",
+                precio: 6000m
+            );
+
+            rest.AgregarCliente(c1);
+            rest.AgregarCliente(c2);
+
+            rest.AgregarPlato(p1);
+            rest.AgregarPlato(p2);
+
             rest.MostrarInfo();
+            Console.WriteLine();
+
+            rest.ListarClientes();
+            Console.WriteLine();
+
+            rest.ListarPlatos();
         }
         catch (Exception ex)
         {
@@ -80,6 +228,3 @@ class Program
         }
     }
 }
-
-
-

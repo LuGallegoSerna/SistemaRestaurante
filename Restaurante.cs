@@ -1,11 +1,16 @@
+using Estructuras;
+
 namespace Dominio
 {
     public class Restaurante
     {
-        private string nit;
-        private string nombre;
-        private string celular;
-        private string direccion;
+        private string nit = string.Empty;
+        private string nombre = string.Empty;
+        private string celular = string.Empty;
+        private string direccion = string.Empty;
+
+        private readonly ListasEnlazada<Cliente> clientes = new ListasEnlazada<Cliente>();
+        private readonly ListasEnlazada<Plato> platos = new ListasEnlazada<Plato>();
 
         public string Nit
         {
@@ -61,12 +66,42 @@ namespace Dominio
 
         public void MostrarInfo()
         {
-            Console.WriteLine("=== INFORMACIÓN DEL RESTAURANTE ===");
+            Console.WriteLine("=== RESTAURANTE ===");
             Console.WriteLine($"NIT: {Nit}");
             Console.WriteLine($"Nombre: {Nombre}");
             Console.WriteLine($"Celular: {Celular}");
             Console.WriteLine($"Dirección: {Direccion}");
-            Console.WriteLine("===================================");
+            Console.WriteLine("===================");
+        }
+
+        public void AgregarCliente(Cliente cliente)
+        {
+            if (cliente is null)
+                throw new ArgumentNullException(nameof(cliente));
+
+            clientes.InsertarInicio(cliente);
+        }
+
+        public void ListarClientes()
+        {
+            Console.WriteLine("=== CLIENTES DEL RESTAURANTE ===");
+            clientes.Mostrar();
+        }
+
+        public void AgregarPlato(Plato plato)
+        {
+            if (plato is null)
+                throw new ArgumentNullException(nameof(plato));
+
+            platos.InsertarInicio(plato);
+        }
+
+        public void ListarPlatos()
+        {
+            Console.WriteLine("=== MENÚ DEL RESTAURANTE ===");
+            platos.Mostrar();
         }
     }
 }
+
+
