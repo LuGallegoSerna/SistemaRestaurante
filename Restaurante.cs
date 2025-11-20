@@ -12,6 +12,12 @@ namespace Dominio
         private readonly ListasEnlazada<Cliente> clientes = new ListasEnlazada<Cliente>();
         private readonly ListasEnlazada<Plato> platos = new ListasEnlazada<Plato>();
 
+        private readonly Cola<Pedido> pedidosPendientes = new Cola<Pedido>();
+        private readonly Pila<Pedido> historialPedidos = new Pila<Pedido>();
+
+        private decimal gananciasHoy = 0;
+        public decimal GananciasHoy => gananciasHoy;
+
         public string Nit
         {
             get => nit;
@@ -101,7 +107,54 @@ namespace Dominio
             Console.WriteLine("=== MENÚ DEL RESTAURANTE ===");
             platos.Mostrar();
         }
+
+       public Plato? BuscarPlato(string codigo)
+        {
+            return platos.Buscar(p => p.Codigo == codigo);
+        }
+
+
+        public void TomarPedido(Pedido pedido)
+        {
+            if (pedido is null)
+                throw new ArgumentNullException(nameof(pedido));
+
+            pedidosPendientes.Encolar(pedido);
+        }
+
+        public void ListarPedidosPendientes()
+        {
+            Console.WriteLine("=== PEDIDOS PENDIENTES ===");
+            pedidosPendientes.Mostrar();
+        }
+
+        public void DespacharPedido()
+        {
+            if (pedidosPendientes.EstaVacia())
+            {
+                Console.WriteLine("No hay pedidos pendientes.");
+                return;
+            }
+
+            Pedido pedido = pedidosPendientes.Desencolar();
+            pedido.MarcarDespachado();
+
+            gananciasHoy += pedido.Total;
+
+            historialPedidos.Apilar(pedido);
+
+            Console.WriteLine($"Pedido {pedido.IdPedido} despachado correctamente.");
+        }
+
+        public void MostrarHistorialPedidos()
+        {
+            Console.WriteLine("=== HISTORIAL DE PEDIDOS DESPACHADOS ===");
+            historialPedidos.Mostrar();
+        }
     }
 }
+
+
+
 
 

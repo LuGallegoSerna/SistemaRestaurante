@@ -136,5 +136,10 @@ namespace Dominio
             Console.WriteLine($"Total: {Total:C}");
             Console.WriteLine("==========================");
         }
+
+        public override string ToString()
+        {
+            return $"Pedido {IdPedido} | Cliente: {CedulaCliente} | Total: {Total:C} | Estado: {Estado}";
+        }
     }
 }

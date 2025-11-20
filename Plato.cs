@@ -59,15 +59,11 @@ namespace Dominio
             Precio = precio;
         }
 
-        public void MostrarInfo()
+        public override string ToString()
         {
-            Console.WriteLine("=== PLATO ===");
-            Console.WriteLine($"Código: {Codigo}");
-            Console.WriteLine($"Nombre: {Nombre}");
-            Console.WriteLine($"Descripción: {Descripcion}");
-            Console.WriteLine($"Precio: {Precio:C}");
-            Console.WriteLine("==========================");
+            return $"{Codigo} - {Nombre} - {Precio:C}";
         }
     }
 }
+
 

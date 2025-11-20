@@ -1,70 +1,68 @@
-namespace Estructuras
+namespace Estructuras;
+
+public class Cola<T>
 {
-    public class Cola<T>
+    private Nodo<T>? inicio;
+    private Nodo<T>? final;
+    private int contador = 0;
+
+    public int Longitud => contador;
+    public bool EstaVacia() => inicio is null;
+
+    public void Encolar(T valor)
     {
-        private Nodo<T>? inicio;
-        private Nodo<T>? final;
-        private int contador = 0;
+        var nuevo = new Nodo<T>(valor);
 
-        public int Longitud => contador;
-
-        public bool EstaVacia() => inicio is null;
-
-        public void Encolar(T valor)
+        if (EstaVacia())
         {
-            Nodo<T> nuevo = new Nodo<T>(valor);
-
-            if (EstaVacia())
-            {
-                inicio = final = nuevo;
-            }
-            else
-            {
-                final!.Siguiente = nuevo;
-                final = nuevo;
-            }
-
-            contador++;
+            inicio = final = nuevo;
+        }
+        else
+        {
+            final!.Siguiente = nuevo;
+            final = nuevo;
         }
 
-        public T? Desencolar()
+        contador++;
+    }
+
+    public T Desencolar()
+    {
+        if (EstaVacia())
+            throw new InvalidOperationException("La cola está vacía.");
+
+        var valor = inicio!.Valor;
+        inicio = inicio.Siguiente;
+        contador--;
+
+        if (inicio is null)
+            final = null;
+
+        return valor;
+    }
+
+    public T Frente()
+    {
+        if (EstaVacia())
+            throw new InvalidOperationException("La cola está vacía.");
+
+        return inicio!.Valor;
+    }
+
+    public void Mostrar()
+    {
+        if (EstaVacia())
         {
-            if (EstaVacia())
-                throw new InvalidOperationException("La cola está vacía.");
-
-            T valor = inicio!.Valor;
-            inicio = inicio.Siguiente;
-            contador--;
-
-            if (inicio is null)
-                final = null;
-
-            return valor;
+            Console.WriteLine("La cola está vacía.");
+            return;
         }
 
-        public T? Frente()
+        var actual = inicio;
+        while (actual != null)
         {
-            if (EstaVacia())
-                throw new InvalidOperationException("La cola está vacía.");
-
-            return inicio!.Valor;
+            Console.Write($"{actual.Valor} <- ");
+            actual = actual.Siguiente;
         }
-
-        public void Mostrar()
-        {
-            if (EstaVacia())
-            {
-                Console.WriteLine("La cola está vacía.");
-                return;
-            }
-
-            Nodo<T>? actual = inicio;
-            while (actual != null)
-            {
-                Console.Write($"{actual.Valor} <- ");
-                actual = actual.Siguiente;
-            }
-            Console.WriteLine("null");
-        }
+        Console.WriteLine("null");
     }
 }
